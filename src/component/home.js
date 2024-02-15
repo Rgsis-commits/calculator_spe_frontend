@@ -8,15 +8,16 @@ function Home() {
     const [secondValue, setSecondValue] = useState('');
     const [result, setResult] = useState('');
     const [operation, setOperation] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     // Function to handle calculation based on operation
     const handleOperation = async (selectedOperation) => {
         try {
-            // Reset the result state
-            setResult('');
-    
-            // Set the selected operation
-            setOperation(selectedOperation);
+            // Reset error state
+            setError('');
+            // Set loading state to true
+            setLoading(true);
     
             // Define the response variable
             let response;
@@ -31,9 +32,15 @@ function Home() {
             // Update result state with the response data
             setResult(response.data);
         } catch (error) {
+            // Set error state
+            setError('An error occurred. Please try again later.');
             console.error('Error:', error);
+        } finally {
+            // Set loading state to false
+            setLoading(false);
         }
     };
+
     return (
         <div className="container">
             <h3>Calculator</h3>
@@ -71,11 +78,14 @@ function Home() {
             </form>
 
             <div className="functions-box">
-                <button onClick={() => handleOperation('factorial')}>Factorial</button>
-                <button onClick={() => handleOperation('logarithmic')}>Logarithmic</button>
-                <button onClick={() => handleOperation('sqrt')}>Square Root</button>
-                <button onClick={() => handleOperation('power')}>Power</button>
+                <button onClick={() => handleOperation('factorial')} disabled={loading}>Factorial</button>
+                <button onClick={() => handleOperation('logarithmic')} disabled={loading}>Logarithmic</button>
+                <button onClick={() => handleOperation('sqrt')} disabled={loading}>Square Root</button>
+                <button onClick={() => handleOperation('power')} disabled={loading}>Power</button>
             </div>
+
+            {error && <div className="error-message">{error}</div>}
+            {loading && <div className="loading-indicator">Loading...</div>}
         </div>
     );
 }
