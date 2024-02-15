@@ -25,4 +25,4 @@
         state: started
         restart_policy: always  # Ensures the container restarts if it stops
         ports:
-          - "8085:8080"
+          - "8085:80"
