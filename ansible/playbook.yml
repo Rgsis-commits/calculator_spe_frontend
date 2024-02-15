@@ -1,1 +1,27 @@
+---
+- name: Deploy Docker container on Ubuntu VM
+  hosts: all
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3 
 
+  tasks:
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+
+    - name: Ensure docker image is present
+      docker_image:
+        name: "rishavchandel/calculator-frontend"
+        tag: latest
+        source: pull
+
+    - name: Run Docker container
+      docker_container:
+        name: calculator_container
+        image: "rishavchandel/calculator-frontend"
+        state: started
+        restart_policy: always  # Ensures the container restarts if it stops
+        ports:
+          - "8085:8080"
