@@ -23,9 +23,9 @@ function Home() {
     
             // Make the appropriate axios request based on the selected operation
             if (selectedOperation === 'power') {
-                response = await axios.get(`http://16.171.2.105:8084/${selectedOperation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`);
+                response = await axios.get(`http://16.171.153.220:8084/${selectedOperation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`);
             } else {
-                response = await axios.get(`http://16.171.2.105:8084/${selectedOperation}/${parseFloat(firstValue)}`);
+                response = await axios.get(`http://16.171.153.220:8084/${selectedOperation}/${parseFloat(firstValue)}`);
             }
     
             // Update result state with the response data
