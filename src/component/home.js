@@ -12,11 +12,17 @@ function Home() {
 
     const handleOperation = (selectedOperation) => {
         setOperation(selectedOperation);
+        setResult(''); // Clear result when operation changes
+        // Remove selected-operation class from all buttons
+        document.querySelectorAll('.functions-box button').forEach(btn => {
+            btn.classList.remove('selected-operation');
+        });
+        // Add selected-operation class to the clicked button
+        document.getElementById(selectedOperation).classList.add('selected-operation');
     };
 
     const handleCalculate = async () => {
         try {
-            setResult('');
             setLoading(true);
             setError('');
 
@@ -75,10 +81,10 @@ function Home() {
             </form>
 
             <div className="functions-box">
-                <button onClick={() => handleOperation('factorial')}>Factorial</button>
-                <button onClick={() => handleOperation('logarithmic')}>Logarithmic</button>
-                <button onClick={() => handleOperation('sqrt')}>Square Root</button>
-                <button onClick={() => handleOperation('power')}>Power</button>
+                <button id="factorial" onClick={() => handleOperation('factorial')}>Factorial</button>
+                <button id="logarithmic" onClick={() => handleOperation('logarithmic')}>Logarithmic</button>
+                <button id="sqrt" onClick={() => handleOperation('sqrt')}>Square Root</button>
+                <button id="power" onClick={() => handleOperation('power')}>Power</button>
             </div>
 
             <button onClick={handleCalculate}>Calculate</button>
