@@ -19,9 +19,9 @@ function Home() {
 
             let response;
             if (selectedOperation === 'power') {
-                response = await axios.get(`http://16.171.153.220:8084/${selectedOperation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`);
+                response = await axios.get(`http://13.51.158.63:8084/${selectedOperation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`);
             } else {
-                response = await axios.get(`http://16.171.153.220:8084/${selectedOperation}/${parseFloat(firstValue)}`);
+                response = await axios.get(`http://13.51.158.63:8084/${selectedOperation}/${parseFloat(firstValue)}`);
             }
 
             setResult(response.data);
