@@ -24,7 +24,8 @@
         name: "rishavchandel/calculator-frontend"
         tag: latest
         source: pull
-        force: yes
+        force_source: yes
+      become: yes
 
     - name: Run Docker container
       docker_container:
