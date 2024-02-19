@@ -23,7 +23,6 @@ function Home() {
             } else {
                 response = await axios.get(`http://13.51.168.92:8086/${selectedOperation}/${parseFloat(firstValue)}`);
             }
-            
 
             setResult(response.data);
         } catch (error) {
@@ -34,6 +33,13 @@ function Home() {
         }
     };
 
+    const handleCalculate = () => {
+        if (operation) {
+            handleOperation(operation);
+        } else {
+            setError('Please select an operation first.');
+        }
+    };
 
     return (
         <div className="container">
@@ -71,6 +77,7 @@ function Home() {
                 </div>
                 <div className="error-message">{error}</div>
                 {loading && <div className="loading-indicator">Loading...</div>}
+                <button type="button" onClick={handleCalculate}>Calculate</button>
             </form>
 
             <div className="functions-box">
