@@ -27,15 +27,6 @@
         force_source: yes
       become: yes
 
-    - name: Check if process is listening on port 8086
-      shell: "lsof -t -i:8086"
-      register: pid_result
-      ignore_errors: true
-    
-    - name: Kill process listening on port 8086
-      shell: "kill -9 {{ pid_result.stdout }}"
-      when: pid_result.rc == 0
-
     - name: Run Docker container
       docker_container:
         name: calculator_container
@@ -43,7 +34,7 @@
         state: started
         restart_policy: always
         published_ports:
-          - "8086:8080"
+          - "8086:80"
         container_default_behavior: "compatibility"
       ignore_errors: true
       register: docker_result
