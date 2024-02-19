@@ -28,22 +28,22 @@
       become: yes
 
     - name: Check if process is listening on port 8086
-        shell: "lsof -t -i:8086"
-        register: pid_result
-        ignore_errors: true
+      shell: "lsof -t -i:8086"
+      register: pid_result
+      ignore_errors: true
     
     - name: Kill process listening on port 8086
-        shell: "kill -9 {{ pid_result.stdout }}"
-        when: pid_result.rc == 0
+      shell: "kill -9 {{ pid_result.stdout }}"
+      when: pid_result.rc == 0
 
     - name: Run Docker container
-        docker_container:
-          name: calculator_container
-          image: "rishavchandel/calculator-frontend"
-          state: started
-          restart_policy: always
-          published_ports:
-            - "8086:8080"
-          container_default_behavior: "compatibility"
-        ignore_errors: true
-        register: docker_result
+      docker_container:
+        name: calculator_container
+        image: "rishavchandel/calculator-frontend"
+        state: started
+        restart_policy: always
+        published_ports:
+          - "8086:8080"
+        container_default_behavior: "compatibility"
+      ignore_errors: true
+      register: docker_result
