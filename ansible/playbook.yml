@@ -12,11 +12,19 @@
         name: docker
         state: started
 
-    - name: Ensure docker image is present
+    - name: Ensure Docker service is started
+      service:
+        name: docker
+        state: started
+      tags: 
+        - docker
+
+    - name: Pull Docker image from Docker Hub
       docker_image:
         name: "rishavchandel/calculator-frontend"
         tag: latest
         source: pull
+        force: yes
 
     - name: Run Docker container
       docker_container:
