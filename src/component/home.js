@@ -10,18 +10,21 @@ function Home() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const handleOperation = async (selectedOperation) => {
+    const handleOperation = (selectedOperation) => {
+        setOperation(selectedOperation);
+    };
+
+    const handleCalculate = async () => {
         try {
             setResult('');
-            setOperation(selectedOperation);
             setLoading(true);
             setError('');
 
             let response;
-            if (selectedOperation === 'power') {
-                response = await axios.get(`http://13.51.168.92:8086/${selectedOperation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`);
+            if (operation === 'power') {
+                response = await axios.get(`http://13.51.168.92:8086/${operation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`);
             } else {
-                response = await axios.get(`http://13.51.168.92:8086/${selectedOperation}/${parseFloat(firstValue)}`);
+                response = await axios.get(`http://13.51.168.92:8086/${operation}/${parseFloat(firstValue)}`);
             }
 
             setResult(response.data);
@@ -30,14 +33,6 @@ function Home() {
             setError('An error occurred. Please try again.');
         } finally {
             setLoading(false);
-        }
-    };
-
-    const handleCalculate = () => {
-        if (operation) {
-            handleOperation(operation);
-        } else {
-            setError('Please select an operation first.');
         }
     };
 
@@ -77,7 +72,6 @@ function Home() {
                 </div>
                 <div className="error-message">{error}</div>
                 {loading && <div className="loading-indicator">Loading...</div>}
-                <button type="button" onClick={handleCalculate}>Calculate</button>
             </form>
 
             <div className="functions-box">
@@ -86,6 +80,8 @@ function Home() {
                 <button onClick={() => handleOperation('sqrt')}>Square Root</button>
                 <button onClick={() => handleOperation('power')}>Power</button>
             </div>
+
+            <button onClick={handleCalculate}>Calculate</button>
         </div>
     );
 }
