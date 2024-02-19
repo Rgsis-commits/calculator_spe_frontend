@@ -33,10 +33,10 @@
         state: started
         restart_policy: always
         published_ports:
-          - "8085:80"
+          - "8086:80"
         container_default_behavior: "compatibility"
       register: docker_result
-      failed_when: docker_result.stderr | search("Bind for 0.0.0.0:8085 failed")
+      failed_when: docker_result.stderr | search("Bind for 0.0.0.0:8086 failed")
       ignore_errors: yes
       tags: 
         - docker
