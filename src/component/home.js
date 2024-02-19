@@ -17,20 +17,21 @@ function Home() {
             setLoading(true);
             setError('');
     
+            const handleOperation = async (selectedOperation) => {
+        try {
+            setResult('');
+            setOperation(selectedOperation);
+            setLoading(true);
+            setError('');
+
             let response;
-            const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
-            const baseUrl = 'http://13.51.158.63:8084/';
-            let requestUrl = '';
-    
             if (selectedOperation === 'power') {
-                requestUrl = `${baseUrl}${selectedOperation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`;
+                response = await axios.get(`http://172.31.35.22:8084/${selectedOperation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`);
             } else {
-                requestUrl = `${baseUrl}${selectedOperation}/${parseFloat(firstValue)}`;
+                response = await axios.get(`http://172.31.35.22:8084/${selectedOperation}/${parseFloat(firstValue)}`);
             }
-    
-            // Make the request through the CORS proxy
-            response = await axios.get(corsProxyUrl + requestUrl);
-    
+            
+
             setResult(response.data);
         } catch (error) {
             console.error('Error:', error);
