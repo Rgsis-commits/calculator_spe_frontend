@@ -16,14 +16,21 @@ function Home() {
             setOperation(selectedOperation);
             setLoading(true);
             setError('');
-
+    
             let response;
+            const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            const baseUrl = 'http://13.51.158.63:8084/';
+            let requestUrl = '';
+    
             if (selectedOperation === 'power') {
-                response = await axios.get(`http://13.51.158.63:8084/${selectedOperation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`);
+                requestUrl = `${baseUrl}${selectedOperation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`;
             } else {
-                response = await axios.get(`http://13.51.158.63:8084/${selectedOperation}/${parseFloat(firstValue)}`);
+                requestUrl = `${baseUrl}${selectedOperation}/${parseFloat(firstValue)}`;
             }
-
+    
+            // Make the request through the CORS proxy
+            response = await axios.get(corsProxyUrl + requestUrl);
+    
             setResult(response.data);
         } catch (error) {
             console.error('Error:', error);
@@ -32,6 +39,7 @@ function Home() {
             setLoading(false);
         }
     };
+
 
     return (
         <div className="container">
