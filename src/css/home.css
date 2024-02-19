@@ -22,6 +22,17 @@ input[type='number'] {
     border-radius: 4px;
 }
 
+/* Add a new class for selected operation */
+.selected-operation {
+    background-color: cyan;
+}
+
+/* Update button:hover to not change color when already selected */
+button:not(.selected-operation):hover {
+    background-color: #0056b3;
+}
+
+
 button {
     padding: 10px 20px;
     margin: 1%;
