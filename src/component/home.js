@@ -16,13 +16,6 @@ function Home() {
             setOperation(selectedOperation);
             setLoading(true);
             setError('');
-    
-            const handleOperation = async (selectedOperation) => {
-        try {
-            setResult('');
-            setOperation(selectedOperation);
-            setLoading(true);
-            setError('');
 
             let response;
             if (selectedOperation === 'power') {
