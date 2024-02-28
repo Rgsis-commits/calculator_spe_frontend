@@ -28,9 +28,9 @@ function Home() {
 
             let response;
             if (operation === 'power') {
-                response = await axios.get(`http://13.51.168.92:8086/${operation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`);
+                response = await axios.get(`http://16.171.37.125:8086/${operation}/${parseFloat(firstValue)}/${parseFloat(secondValue)}`);
             } else {
-                response = await axios.get(`http://13.51.168.92:8086/${operation}/${parseFloat(firstValue)}`);
+                response = await axios.get(`http://16.171.37.125:8086/${operation}/${parseFloat(firstValue)}`);
             }
 
             setResult(response.data);
